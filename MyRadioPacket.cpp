@@ -121,8 +121,8 @@ void MyRadioPacket::sendPingResponse(RF24 radio) {
     printActivity(true, "PONG\r\n");
     p.cmd=RADIO_CMD_PONG;
     p.type = mode==master? RADIO_TYPE_M_TO_S : RADIO_TYPE_S_TO_M; // RADIO_TYPE_SEND;
-    p.dev_from = device_id;
     p.dev_to = p.dev_from;
+    p.dev_from = device_id;
     send(radio);
 }
 
@@ -191,7 +191,7 @@ void MyRadioPacket::printInfo(bool printValues, uint8_t fromPipe) {
 	//printf("prot_id=0x%02x\t", p.prot_id); printf("type=0x%02x\r\n", p.type);
 	//printf("path: "); radio_packet_print_path(p);
 	Serial.print(F("from=0x")); Serial.print(p.dev_from, HEX);
-	Serial.print(F("\tfrom=0x")); Serial.println(p.dev_to, HEX);
+	Serial.print(F("\tto=0x")); Serial.println(p.dev_to, HEX);
 	// printf("from=0x%04x\t", p.dev_from); printf("to=0x%04x\r\n", p.dev_to);
 	Serial.print(F("cmd=")); Serial.print(p.cmd);
 	//printf("cmd=0x%02x\r\n", p.cmd);
